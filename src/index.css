@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  font-family: "Poppins", serif;
+}
+
+@layer base {
+  body {
+    @apply text-gray-800;
+  }
+}
+
+@layer components {
+  .modal {
+    @apply fixed inset-0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .modal-content {
+    @apply bg-white p-4 rounded overflow-y-auto w-[40em] max-h-[31em] my-[8em] mx-auto;
+  }
+
+  .detail-link {
+    @apply border-2 flex gap-1 items-center px-2 rounded text-[#6c63ff] border-[#6c63ff] shadow bg-white;
+  }
+
+  .detail-link svg {
+    @apply text-2xl;
+  }
+
+  .detail-link:hover > svg {
+    animation: vavoom 0.9s infinite 0.5s;
+  }
+
+  .hide-form {
+    @apply h-0 overflow-hidden opacity-0;
+  }
+
+  .show-form {
+    @apply h-[4em] opacity-100;
+  }
+
+  .tenant-item {
+    @apply shadow-sm rounded h-80 p-3 my-4 hover:scale-105 transition-transform;
+  }
+
+  .tenant-item.valid {
+    @apply bg-[#cefddb];
+  }
+
+  .tenant-item.warn {
+    @apply bg-yellow-100;
+  }
+
+  .tenant-item.danger {
+    @apply bg-red-100;
+  }
+
+  .btn-primary {
+    @apply bg-[#e7e5ff] text-[#6c63ff] p-2 rounded-xl font-semibold cursor-pointer flex items-center gap-1 transition-colors hover:bg-[#beb8ff];
+  }
+
+  .btn-secondary {
+    @apply bg-red-100 text-red-600 p-2 rounded-xl font-semibold cursor-pointer flex items-center gap-1 transition-colors hover:bg-red-200;
+  }
+}
+
+@keyframes vavoom {
+  0% {
+    transform: translateX(7px);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(7px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.filter-form {
+  transition: height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 640px) {
+  .show-form {
+    @apply h-[11.5em];
+  }
+
+  .show-form form > div {
+    @apply my-2;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .modal-content {
+    @apply w-[90%] overflow-y-auto;
+  }
+}
