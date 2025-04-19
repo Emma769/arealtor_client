@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { isAxiosError } from "axios";
 import { PiSignInBold } from "react-icons/pi";
@@ -11,13 +11,9 @@ import { type LoginParam, loginParamSchema } from "../schemas/auth";
 type FetchState = "IDLE" | "SUBMITTING" | "FAIL" | "FULFILL";
 
 export default function LoginForm() {
-  const { setPayload, payload, persist, setPersist } = useAuth();
+  const { setPayload, persist, setPersist } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    console.log(payload.token);
-  }, []);
 
   const [fetchState, setFetchState] = useState<FetchState>("IDLE");
   const [email, setEmail] = useState("");
