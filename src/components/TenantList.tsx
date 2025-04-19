@@ -110,7 +110,9 @@ export function TenantList() {
           <FilterForm show={showFilterForm} />
         </div>
         {!tenants.length && !loading ? (
-          <div className="font-semibold text-xl">No Tenants Registered!</div>
+          <div className="font-semibold text-xl mt-4">
+            No Tenants Registered!
+          </div>
         ) : (
           <div className="md:grid md:grid-cols-3 md:gap-4 sm:grid sm:gap-4 sm:grid-cols-2 text-sm">
             {tenants.map((tenant, i, tenants) => {
@@ -126,7 +128,6 @@ export function TenantList() {
             })}
           </div>
         )}
-
         {loading && (
           <div className="flex justify-center">
             <Spinner />

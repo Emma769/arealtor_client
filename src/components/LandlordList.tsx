@@ -99,7 +99,7 @@ export default function LandlordList() {
           <div>
             <>
               {!landlords.length && !loading ? (
-                <div className="font-semibold text-xl">
+                <div className="font-semibold text-xl mt-4">
                   No Landlords Registered!
                 </div>
               ) : (
