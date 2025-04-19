@@ -22,7 +22,6 @@ export function TenantList() {
   const [searchParams] = useSearchParams();
   const xapi = useAxiosPrivate();
 
-  const mounted = useRef(false);
   const page = useRef(1);
 
   const [showFilterForm, setShowFilterForm] = useState(false);
@@ -53,11 +52,6 @@ export function TenantList() {
   };
 
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
-
     getTenants();
   }, []);
 

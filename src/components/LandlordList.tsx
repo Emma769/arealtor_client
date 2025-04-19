@@ -22,7 +22,6 @@ export default function LandlordList() {
   const [loading, setLoading] = useState(false);
   const [hasNextPage, setHasNextPage] = useState(false);
 
-  const mountedRef = useRef(false);
   const page = useRef(1);
 
   const getLandlords = async (page: number = 1) => {
@@ -47,11 +46,6 @@ export default function LandlordList() {
   };
 
   useEffect(() => {
-    if (!mountedRef.current) {
-      mountedRef.current = true;
-      return;
-    }
-
     getLandlords();
   }, []);
 
