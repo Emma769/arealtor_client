@@ -77,45 +77,51 @@ export default function LandlordList() {
 
   return (
     <>
-      <div className="my-5">
-        <div>
-          <div className="flex justify-end gap-2">
-            <button
-              className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
-              onClick={() => setShowFilterForm((prev) => !prev)}
-            >
-              <BiFilter className="text-xl" />
-            </button>
-            <button
-              className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
-              onClick={handleDownloadXlsx}
-            >
-              <HiOutlineDownload className="text-xl" />
-            </button>
-          </div>
-          <FilterForm show={showFilterForm} />
-        </div>
-        <div>
-          <div className="md:grid md:grid-cols-3 md:gap-4 sm:grid sm:gap-4 sm:grid-cols-2 text-sm">
-            {landlords.map((landlord, i, landlords) => {
-              return (
-                <div
-                  key={genRandomID()}
-                  className="shadow-sm rounded h-80 p-3 bg-[#e7e5ff] my-4 hover:scale-105 transition-transform"
-                  ref={landlords.length - 1 === i ? lastLandlordRef : null}
+      {!landlords.length && !loading ? (
+        <div className="font-semibold text-xl">No Landlords Registered!</div>
+      ) : (
+        <>
+          <div className="my-5">
+            <div>
+              <div className="flex justify-end gap-2">
+                <button
+                  className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
+                  onClick={() => setShowFilterForm((prev) => !prev)}
                 >
-                  <LandlordItem landlord={landlord} />
-                </div>
-              );
-            })}
-          </div>
-          {loading && (
-            <div className="flex justify-center">
-              <Spinner />
+                  <BiFilter className="text-xl" />
+                </button>
+                <button
+                  className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
+                  onClick={handleDownloadXlsx}
+                >
+                  <HiOutlineDownload className="text-xl" />
+                </button>
+              </div>
+              <FilterForm show={showFilterForm} />
             </div>
-          )}
-        </div>
-      </div>
+            <div>
+              <div className="md:grid md:grid-cols-3 md:gap-4 sm:grid sm:gap-4 sm:grid-cols-2 text-sm">
+                {landlords.map((landlord, i, landlords) => {
+                  return (
+                    <div
+                      key={genRandomID()}
+                      className="shadow-sm rounded h-80 p-3 bg-[#e7e5ff] my-4 hover:scale-105 transition-transform"
+                      ref={landlords.length - 1 === i ? lastLandlordRef : null}
+                    >
+                      <LandlordItem landlord={landlord} />
+                    </div>
+                  );
+                })}
+              </div>
+              {loading && (
+                <div className="flex justify-center">
+                  <Spinner />
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
