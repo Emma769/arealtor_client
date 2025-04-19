@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { api } from "../api";
 import useAuth from "./useAuth";
 
@@ -14,5 +13,5 @@ export default function useRefreshToken() {
     return payload.token;
   };
 
-  return useCallback(refresh, []);
+  return refresh;
 }
