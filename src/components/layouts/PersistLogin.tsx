@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../ui/Loading";
+import { REFRESH_TOKEN_KEY } from "../../constants/constants";
 
 export default function PersistLogin() {
   const refreshfn = useRefreshToken();
@@ -17,6 +18,7 @@ export default function PersistLogin() {
         await refreshfn();
       } catch (err) {
         console.error(err);
+        localStorage.removeItem(REFRESH_TOKEN_KEY);
       } finally {
         if (isMounted) {
           setLoading(false);
