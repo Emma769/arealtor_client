@@ -14,6 +14,7 @@ export default function PersistLogin() {
 
     const verifyLogin = async () => {
       try {
+        console.log("ran verify login");
         await refreshfn();
       } catch (err) {
         console.error(err);
