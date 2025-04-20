@@ -11,7 +11,7 @@ import { type LoginParam, loginParamSchema } from "../schemas/auth";
 type FetchState = "IDLE" | "SUBMITTING" | "FAIL" | "FULFILL";
 
 export default function LoginForm() {
-  const { setPayload, persist, setPersist } = useAuth();
+  const { setPayload } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -129,12 +129,7 @@ export default function LoginForm() {
           </button>
         </div>
         <div className="mt-4 flex items-center gap-1">
-          <input
-            type="checkbox"
-            id="remember-id"
-            checked={persist}
-            onChange={() => setPersist(!persist)}
-          />
+          <input type="checkbox" id="remember-id" />
           <label htmlFor="remember-id" className="text-xs">
             Remember me?
           </label>

@@ -10,22 +10,25 @@ export default function PersistLogin() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     const verifyLogin = async () => {
       try {
         await refreshfn();
       } catch (err) {
         console.error(err);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
-    if (payload.token) {
+    if (!payload.token) {
+      verifyLogin();
+    } else {
       setLoading(false);
-      return;
     }
-
-    verifyLogin();
   }, []);
 
   return loading ? <Loading /> : <Outlet />;
