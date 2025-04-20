@@ -46,7 +46,6 @@ export default function LoginForm() {
     try {
       setFetchState("SUBMITTING");
       const resp = await api.post("/api/auth/login", param);
-      console.log(resp.data);
       const payload = resp.data;
       setPayload({
         token: payload.accessToken.value,
