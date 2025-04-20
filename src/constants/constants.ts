@@ -4,6 +4,8 @@ export const CLOUDINARY_UPLOAD_PRESET = import.meta.env
   .VITE_CLOUDINARY_UPLOAD_PRESET;
 export const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL;
 
+export const REFRESH_TOKEN_KEY = "refreshToken_iseoluwa_is_a_cunt_stfu_mofo";
+
 export const PROPERTY_TYPES = [
   "Blocks of flat",
   "Bungalow",

@@ -13,5 +13,4 @@ export const xapi = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
 });

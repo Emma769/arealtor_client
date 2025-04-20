@@ -7,6 +7,7 @@ import { validate } from "../utils/validator";
 import { api } from "../api";
 import useAuth from "../hooks/useAuth";
 import { type LoginParam, loginParamSchema } from "../schemas/auth";
+import { REFRESH_TOKEN_KEY } from "../constants/constants";
 
 type FetchState = "IDLE" | "SUBMITTING" | "FAIL" | "FULFILL";
 
@@ -44,10 +45,14 @@ export default function LoginForm() {
 
     try {
       setFetchState("SUBMITTING");
-      const resp = await api.post("/api/auth/login", param, {
-        withCredentials: true,
+      const resp = await api.post("/api/auth/login", param);
+      console.log(resp.data);
+      const payload = resp.data;
+      setPayload({
+        token: payload.accessToken.value,
+        type: "Bearer",
       });
-      setPayload(resp.data);
+      localStorage.setItem(REFRESH_TOKEN_KEY, payload.refreshToken.value);
       navigate(location.state?.from?.pathname || "/");
       setFetchState("FULFILL");
       setEmail("");
