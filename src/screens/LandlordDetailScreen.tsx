@@ -18,7 +18,7 @@ import { AnimatePresence } from "framer-motion";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { CiUser } from "react-icons/ci";
 import { MdContentCopy, MdOutlineNumbers } from "react-icons/md";
-import { IoIosAddCircle, IoIosPricetag } from "react-icons/io";
+import { IoIosAddCircle, IoIosPricetag, IoMdCheckmark } from "react-icons/io";
 import { FaRegAddressBook } from "react-icons/fa";
 import { PiHouseBold } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
@@ -94,6 +94,30 @@ export default function LandlordDetailScreen() {
       console.error(err);
     }
   };
+
+  const [phoneCopied, setPhoneCopied] = useState(false);
+
+  useEffect(() => {
+    if (phoneCopied) {
+      let timeout = setTimeout(() => {
+        setPhoneCopied(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [phoneCopied]);
+
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  useEffect(() => {
+    if (emailCopied) {
+      let timeout = setTimeout(() => {
+        setEmailCopied(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [emailCopied]);
 
   return (
     <>
@@ -196,9 +220,17 @@ export default function LandlordDetailScreen() {
                     />
                     <button
                       className="cursor-pointer absolute bottom-0 right-1.5 top-[16px] h-fit"
-                      onClick={() => handleCopy(landlord.phone)}
+                      onClick={() => {
+                        handleCopy(landlord.phone);
+                        setPhoneCopied(true);
+                      }}
+                      title="copy"
                     >
-                      <MdContentCopy className="text-gray-600" />
+                      {phoneCopied ? (
+                        <IoMdCheckmark />
+                      ) : (
+                        <MdContentCopy className="text-gray-600" />
+                      )}
                     </button>
                   </div>
                   <div className="w-full relative mb-2">
@@ -213,9 +245,17 @@ export default function LandlordDetailScreen() {
                     />
                     <button
                       className="cursor-pointer absolute bottom-0 right-1.5 top-[16px] h-fit"
-                      onClick={() => handleCopy(landlord.email)}
+                      onClick={() => {
+                        handleCopy(landlord.email);
+                        setEmailCopied(true);
+                      }}
+                      title="copy"
                     >
-                      <MdContentCopy className="text-gray-600" />
+                      {emailCopied ? (
+                        <IoMdCheckmark />
+                      ) : (
+                        <MdContentCopy className="text-gray-600" />
+                      )}
                     </button>
                   </div>
                 </div>

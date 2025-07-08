@@ -9,12 +9,12 @@ export default function Nav() {
 
   return (
     <nav className="flex justify-between items-center h-[10vh]">
-      <Link to="/">
+      <Link to="/" title="home">
         <PiHouseBold className="text-2xl opacity-80 hover:opacity-100 transition-opacity" />
       </Link>
       <div>
         {payload.token && (
-          <button onClick={logoutfn} className="cursor-pointer">
+          <button onClick={logoutfn} className="cursor-pointer" title="logout">
             <PiSignOutBold className="text-2xl opacity-80 hover:opacity-100 transition-opacity" />
           </button>
         )}

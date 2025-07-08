@@ -91,49 +91,47 @@ export function TenantList() {
 
   return (
     <>
-      <>
-        <div>
-          <div className="flex justify-end gap-2">
-            <button
-              className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
-              onClick={() => setShowFilterForm((prev) => !prev)}
-            >
-              <BiFilter className="text-xl" />
-            </button>
-            <button
-              className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
-              onClick={handleDownloadXlsx}
-            >
-              <HiOutlineDownload className="text-xl" />
-            </button>
-          </div>
-          <FilterForm show={showFilterForm} />
+      <div>
+        <div className="flex justify-end gap-2">
+          <button
+            className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
+            onClick={() => setShowFilterForm((prev) => !prev)}
+            title="filter"
+          >
+            <BiFilter className="text-xl" />
+          </button>
+          <button
+            className="cursor-pointer transition-colors hover:text-[#6c63ff] hover:bg-[#e7e5ff] p-2 rounded-full"
+            onClick={handleDownloadXlsx}
+            title="download csv"
+          >
+            <HiOutlineDownload className="text-xl" />
+          </button>
         </div>
-        {!tenants.length && !loading ? (
-          <div className="font-semibold text-xl mt-4">
-            No Tenants Registered!
-          </div>
-        ) : (
-          <div className="md:grid md:grid-cols-3 md:gap-4 sm:grid sm:gap-4 sm:grid-cols-2 text-sm">
-            {tenants.map((tenant, i, tenants) => {
-              return (
-                <div
-                  key={genRandomID()}
-                  className={`${"tenant-item"} ${checkRentExpiration(tenant)}`}
-                  ref={tenants.length - 1 === i ? lastTenantRef : null}
-                >
-                  <TenantItem tenant={tenant} />
-                </div>
-              );
-            })}
-          </div>
-        )}
-        {loading && (
-          <div className="flex justify-center">
-            <Spinner />
-          </div>
-        )}
-      </>
+        <FilterForm show={showFilterForm} />
+      </div>
+      {!tenants.length && !loading ? (
+        <div className="font-semibold text-xl mt-4">No Tenants Registered!</div>
+      ) : (
+        <div className="md:grid md:grid-cols-3 md:gap-4 sm:grid sm:gap-4 sm:grid-cols-2 text-sm">
+          {tenants.map((tenant, i, tenants) => {
+            return (
+              <div
+                key={genRandomID()}
+                className={`${"tenant-item"} ${checkRentExpiration(tenant)}`}
+                ref={tenants.length - 1 === i ? lastTenantRef : null}
+              >
+                <TenantItem tenant={tenant} />
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {loading && (
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
+      )}
     </>
   );
 }

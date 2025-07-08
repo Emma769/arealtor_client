@@ -14,7 +14,7 @@ import {
   getDateStr,
   getFullDateStr,
 } from "../utils/funcs";
-import { IoIosAddCircle, IoIosPricetag } from "react-icons/io";
+import { IoIosAddCircle, IoIosPricetag, IoMdCheckmark } from "react-icons/io";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { CiUser } from "react-icons/ci";
 import { MdContentCopy, MdOutlinePhoneIphone } from "react-icons/md";
@@ -98,6 +98,30 @@ export default function TenantDetailScreen() {
 
   const handleOpenShowDeleteConfirm = () => setShowDeleteConfirmation(true);
   const handleOpenShowRentInfo = () => setShowRentInfoForm(true);
+
+  const [phoneCopied, setPhoneCopied] = useState(false);
+
+  useEffect(() => {
+    if (phoneCopied) {
+      let timeout = setTimeout(() => {
+        setPhoneCopied(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [phoneCopied]);
+
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  useEffect(() => {
+    if (emailCopied) {
+      let timeout = setTimeout(() => {
+        setEmailCopied(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [emailCopied]);
 
   return (
     <>
@@ -206,9 +230,17 @@ export default function TenantDetailScreen() {
                   />
                   <button
                     className="cursor-pointer absolute bottom-0 right-1.5 top-[16px] h-fit"
-                    onClick={() => handleCopy(tenant.phone)}
+                    onClick={() => {
+                      handleCopy(tenant.phone);
+                      setPhoneCopied(true);
+                    }}
+                    title="copy"
                   >
-                    <MdContentCopy className="text-gray-600" />
+                    {phoneCopied ? (
+                      <IoMdCheckmark />
+                    ) : (
+                      <MdContentCopy className="text-gray-600" />
+                    )}
                   </button>
                 </div>
                 <div className="w-full relative mb-2">
@@ -223,9 +255,17 @@ export default function TenantDetailScreen() {
                   />
                   <button
                     className="cursor-pointer absolute bottom-0 right-1.5 top-[16px] h-fit"
-                    onClick={() => handleCopy(tenant.email)}
+                    onClick={() => {
+                      handleCopy(tenant.email);
+                      setEmailCopied(true);
+                    }}
+                    title="copy"
                   >
-                    <MdContentCopy className="text-gray-600" />
+                    {emailCopied ? (
+                      <IoMdCheckmark />
+                    ) : (
+                      <MdContentCopy className="text-gray-600" />
+                    )}
                   </button>
                 </div>
               </div>
