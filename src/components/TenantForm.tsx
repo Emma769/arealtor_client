@@ -270,7 +270,9 @@ export default function TenantForm() {
 
     setFetchState("LOADING");
     try {
-      const resp = await xapi.get(`/api/landlords?phone=${landlordPhone}`);
+      const resp = await xapi.get(
+        `/api/landlords?phone=${landlordPhone}&page_size=${30}`
+      );
       const payload = resp.data;
       if (payload?.data.length > 0) {
         setFetchState("FULFILL");
